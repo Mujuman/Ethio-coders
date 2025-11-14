@@ -1,169 +1,719 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Code spark</title>
-	<link rel="stylesheet" href="style.css">
-	<style>body{
-font-family: Arial, Helvetica, sans-serif;
-margin: 0;
-padding: 0;
-background-color: whitesmoke;
-}
-h1 {
-text-align: center;
-text-decoration: underline;
-color: #000000;
-}
-nav{
-background-color: #3B4AF1;
-color: white;
-box-shadow: 0px 4px 65px 70px #3B4AF1;
-}
-nav h1{
-font-size: 40px;
-margin: 0;
-padding: 40px;
-text-align: center;
-
-}
-section{
-padding: 20px;
-border-radius: 20px;
-margin: 10px;
-box-shadow: 2px 2px 6px 2px #C6C8E2;
-background-color: #FFFFFF;
-}
-
-.about{
-text-align: center;
-color: #000000;
-padding: 20px;
-}
-a{
-text-decoration: none;
-color:#FF9B02;
-}
-footer{
-
-padding: 20px;
-color:white;
-
-box-shadow: 2px 2px 6px 2px #C6C8E2;
-background-color: #000000;
-
-
-}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Spark - Learn Web Development</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3B4AF1;
+            --secondary: #FF9B02;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), #2a38c9);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .language-selector {
+            position: relative;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            width: 150px;
+            display: none;
+            overflow: hidden;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .language-dropdown a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(59, 74, 241, 0.9), rgba(59, 74, 241, 0.8)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 155, 2, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 155, 2, 0.4);
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Services */
+        .services {
+            background: var(--white);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Courses */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .course-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .course-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .course-button:hover {
+            background: #2a38c9;
+        }
+        
+        /* Contact */
+        .contact {
+            background: var(--white);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<nav>
-	<h1 style="color: white; text-decoration: none;">Welcome to Code spark</h1>
-	<details style="border: 2px solid deepskyblue;width:100px;position: fixed;color:black;">
-	<summary>
-		Languages
-	</summary>
-	<ul>
-		<li><a href="https://mujuman.github.io/Ethio-coders/">English</a></li>
-		<br>
-		<li><a href="https://mujuman.github.io/Ethio-coders-Amharic-/">አማርኛ</a></li>
-	</ul>
-</details>
-</nav>
-<br>
-<br>
-	<h1>👨‍💻About us</h1>
-<section>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <h1>Code Spark</h1>
+                </div>
+                <div class="language-selector">
+                    <button class="language-btn">
+                        <i class="fas fa-globe"></i>
+                        English
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="https://mujuman.github.io/Ethio-coders/">English</a>
+                        <a href="https://mujuman.github.io/Ethio-coders-Amharic-/">አማርኛ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-	<p class="about">Welcome to Code spark! This channel is here to help beginners learn and grow in coding. We provide simple and useful tutorials on HTML, CSS, and JavaScript.
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Ignite Your Coding Journey</h2>
+            <p>Learn web development with simple, practical tutorials and build your skills from the ground up.</p>
+            <a href="#courses" class="cta-button">Start Learning Now</a>
+        </div>
+    </section>
 
-Our goal is to inspire and support our members to become skilled and confident in coding. Join us to start your coding journey today!</p>
-<br>
-<br>
-<a href="https://t.me/Muju_man_coding">Visit our Telegram channel.</a>
-</section>
-<br>
-<br>
-<br>
-<br>
-<h1>💻Our Service</h1>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>Learn more about our mission and what makes Code Spark the perfect place to start your coding journey</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to Code Spark! We're dedicated to helping beginners learn and grow in coding through simple, useful tutorials on HTML, CSS, and JavaScript.</p>
+                    <br>
+                    <p>Our goal is to inspire and support our members to become skilled and confident coders. With practical examples, step-by-step guidance, and a supportive community, we make coding accessible to everyone.</p>
+                    <br>
+                    <a href="https://t.me/Muju_man_coding" class="cta-button">Join Our Community</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Team collaboration">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-	<ul>
-		<li>Web Design</li>
-		<li>Teaching Web Development
-		<ol>
-			<li>HTML</li>
-			<li>CSS</li>
-			<li>JAVASCRIPT</li>
-		</ol>
-		</li>
-		<li>live program</li>
-	</ul>
-</section>
-<br>
-<br>
-<br>
-<br>
-<h1>📒Courses</h1>
-<section>
-<ol>
-	<li><button ><a href="https://t.me/Muju_man_coding/287">Html</a></button></li>
-	<br>
-	<li>
-		<button ><a href="https://t.me/Muju_man_coding/790">Css</a></button>
-	</li>
-	<br>
-	<li>
-		<button ><a href="#">JavaScript</a></button>
-	</li>
-</ol>
-<br>
-<br>
-<p>To learn press 👆 the button! </p>
-</section>
-<br>
-<br>
-<br>
-	<h1>📧To Send Projects</h1>
-	<section>
-	<button>
-		<a href="https://t.me/Projects1t2m1Bot">Send your Project</a>
-	</button>
-	</section>
-<br>
-<br>
-<br>
-<h1>📲Contact Us</h1>
-<section>
-	<p>e-mail</p>
-	<hr>
-	<a href="mailto:mujahidhussen75@gmail.com">mujahidhussen75@gmail.com</a>
-	<p>Phone</p>
-	<hr>
-	<a href="tel:0948990854">0948990854</a>
-	<P>Telegram</P>
-	<hr>
-	<a href="https://t.me/mujuman12">@mujuman12</a>
-</section>
-<footer>
-	<p>links</p>
-	<hr>
-	<a href="https://t.me/Muju_man_coding">Code spark</a>
-	<br>
-	<a href="https://t.me/muju_man">Code spark group</a>
-	<hr>
-	
-<br>
-<br>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive web development services and education to help you succeed</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Design</h3>
+                    <p>Beautiful, responsive website designs that work perfectly on all devices and screen sizes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Web Development Courses</h3>
+                    <p>Comprehensive courses covering HTML, CSS, and JavaScript with practical projects.</p>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li>HTML Fundamentals</li>
+                        <li>CSS Styling & Layouts</li>
+                        <li>JavaScript Programming</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Live Programming Sessions</h3>
+                    <p>Interactive live coding sessions where you can ask questions and get immediate feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<p>&copy; mujahaid hussen 2024</p>
-	<br>
-	
-</footer>
+    <!-- Courses Section -->
+    <section id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Courses</h2>
+                <p>Start your coding journey with our structured learning path</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="course-content">
+                        <h3>HTML Fundamentals</h3>
+                        <p>Learn the building blocks of web development with HTML. Create structured, semantic web pages.</p>
+                        <a href="https://t.me/Muju_man_coding/287" class="course-button">Start Learning</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="course-content">
+                        <h3>CSS Styling</h3>
+                        <p>Master CSS to create beautiful, responsive designs that bring your websites to life.</p>
+                        <a href="https://t.me/Muju_man_coding/790" class="course-button">Start Learning</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <div class="course-content">
+                        <h3>JavaScript Programming</h3>
+                        <p>Add interactivity and dynamic functionality to your websites with JavaScript.</p>
+                        <a href="#" class="course-button">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Project Submission -->
+    <section id="projects" style="background: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Submit Your Projects</h2>
+                <p>Share your work with our community and get valuable feedback</p>
+            </div>
+            <div style="text-align: center;">
+                <p style="margin-bottom: 20px;">Have you completed a project using our tutorials? Share it with us!</p>
+                <a href="https://t.me/Projects1t2m1Bot" class="cta-button">Submit Your Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for any questions or support</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:mujahidhussen75@gmail.com">mujahidhussen75@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <a href="tel:0948990854">0948990854</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Telegram</h3>
+                            <a href="https://t.me/mujuman12">@mujuman12</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: var(--light); padding: 30px; border-radius: 10px;">
+                    <h3 style="margin-bottom: 15px;">Connect With Our Community</h3>
+                    <p>Join our Telegram channels to stay updated with the latest tutorials, ask questions, and connect with fellow learners.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="https://t.me/Muju_man_coding" class="course-button" style="margin-right: 10px;">Code Spark Channel</a>
+                        <a href="https://t.me/muju_man" class="course-button" style="background: var(--secondary);">Code Spark Group</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Code Spark</h3>
+                    <p>Igniting coding passion through simple, practical tutorials and a supportive community.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/Muju_man_coding">Telegram Channel</a></li>
+                        <li><a href="https://t.me/muju_man">Telegram Group</a></li>
+                        <li><a href="https://t.me/Projects1t2m1Bot">Project Submission</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Code Spark. All rights reserved. | Designed with ❤️ by Mujahid Hussen</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language selector functionality
+        document.querySelector('.language-btn').addEventListener('click', function() {
+            document.querySelector('.language-dropdown').classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.language-btn')) {
+                const dropdown = document.querySelector('.language-dropdown');
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
